@@ -1,5 +1,5 @@
 ## AMABot Products tracking
-Search products of the many differencts online stores and compare prices, get products of lower price
+Search products of the many differents online stores and compare prices, get products of lower price
 
 Get start [AMABot](https://t.me/amaproductsbot) and seach products
 
@@ -35,14 +35,14 @@ npm install
 To be able to create a bot is necessary to use [BotFather](https://t.me/BotFather) of the telegram, follow the steps, and create a bot.
 You should be able to get a token from telegram.
 
-2. Copy ```.env.example``` to ```.env```
-2. Set environment variables
+4. Copy ```.env.example``` to ```.env```
+5. Set environment variables
 ```
 AMABOT_TELEGRAM_TOKEN=<here telegram token>
 ....
 ....
 ```
-3. Create new image
+6. Create new image
 * One time to build project
 ```
 docker-compose up -d --build
