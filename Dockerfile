@@ -1,11 +1,14 @@
 FROM node:18-alpine3.15
 
-WORKDIR /app
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-COPY . ./app
-COPY package.json tsconfig.json tsconfig.build.json /app/
+COPY package*.json ./
+RUN npm install -g @nestjs/cli
 
-RUN npm install --omit=dev
+RUN npm install --force --omit=dev
+
+COPY . .
 
 RUN npm run build
 
