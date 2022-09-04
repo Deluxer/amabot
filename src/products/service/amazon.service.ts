@@ -19,7 +19,7 @@ export class AmazonService {
         const product = products[0].filter((item: any) => item.title && item.price ).shift();
         if(product === 0) return;
         
-        let { title, price, image, url, idProductByStore  } = product;
+        let { title = '', price, image, url, idProductByStore  } = product;
         const formatPrice = Number(price.replace(/[^0-9.-]+/g,""));
         url = `https://www.amazon.com.mx/${ url }`;
 

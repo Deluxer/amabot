@@ -25,7 +25,8 @@ Example API response [http://api.mireino.com/products](http://api.mireino.com/pr
 ## To do task
 * Subscribe and receive a notification when the price changes. Format /buscar \<product> /<price>
 * Swagger documentation
-* Generate a Cron for automatic searches and update database  
+* Generate a Cron for automatic searches and update database
+* Unit test with jest
 
 
 # Crate new project
@@ -62,7 +63,7 @@ AMABOT_TELEGRAM_TOKEN=<here telegram token>
 docker-compose up -d
 ```
 
-### If you don't want to use docker, then use the following commands, you must create and connect the database
+### If you don't want to use docker, then use the following commands, you must create PostgresSQL database and make connection.
 
 ```bash
 Note: --force is used because 'nest-crawler' use an old version of @nestjs/common
@@ -86,3 +87,9 @@ npm run start
 ## Dependencies
 * Scraping Amazon products with [Nest-crawler](https://www.npmjs.com/package/nest-crawler)
 * axios
+
+## Aditional information
+* Build and Deploy On AWS using the free instance
+    - Route 53
+    - Load balancer
+    - EC2
