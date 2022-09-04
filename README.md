@@ -12,14 +12,14 @@ Get start [AMABot](https://t.me/amaproductsbot) and seach products
 2. Click on start
 3. Use the command /buscar \<product>  | ✔ | 
 
-Result information by product:
-Example API response [http://api.mireino.com/products](http://api.mireino.com/products)
+Search result by product:
 ```
 * Name products
 * Price
 * URL
 
 ```
+Example API response [http://api.mireino.com/products](http://api.mireino.com/products)
 
 
 ## To do task
