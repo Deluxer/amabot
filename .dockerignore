@@ -2,4 +2,3 @@ nodes_modules/
 dist/
 .gitignore
 .git/
-postgres-data/
