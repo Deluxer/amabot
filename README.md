@@ -25,6 +25,7 @@ Example API response [http://api.mireino.com/products](http://api.mireino.com/pr
 ## To do task
 * Subscribe and receive a notification when the price changes. Format /buscar \<product> /<price>
 * Swagger documentation
+* Generate a Cron for automatic searches and update database  
 
 
 # Crate new project
