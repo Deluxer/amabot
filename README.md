@@ -13,12 +13,18 @@ Get start [AMABot](https://t.me/amaproductsbot) and seach products
 3. Use the command /buscar \<product>  | ✔ | 
 
 Result information by product:
+Example API response [http://api.mireino.com/products](http://api.mireino.com/products)
+```
 * Name products
 * Price
 * URL
 
+```
+
+
 ## To do task
 * Subscribe and receive a notification when the price changes. Format /buscar \<product> /<price>
+* Swagger documentation
 
 
 # Crate new project
