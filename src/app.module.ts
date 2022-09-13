@@ -18,7 +18,7 @@ import { ProductsModule } from './products/products.module';
       database: process.env.DB_NAME,
       entities: [Product],
       synchronize: true,
-    }),    
+    }),
     TelegrafModule.forRootAsync({
       botName: 'amabot',
       useFactory: () => ({

@@ -1,34 +1,34 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-export type MarketType = "ml" | "amz";
+export type MarketType = 'ml' | 'amz';
 
-@Entity({name: 'products'})
+@Entity({ name: 'products' })
 export class Product {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'text', unique: true })
   idProductByStore: string;
-  
-  @Column({ 
+
+  @Column({
     type: 'enum',
-    enum: ["ml", "amz"],
+    enum: ['ml', 'amz'],
   })
   idMarketplace: MarketType;
 
-  @Column({ type:'text' })
+  @Column({ type: 'text' })
   name: string;
-  
-  @Column({ type:'text' })
+
+  @Column({ type: 'text' })
   description: string;
-  
-  @Column({ type:'float', default: 0 })
+
+  @Column({ type: 'float', default: 0 })
   price: number;
-  
-  @Column({ type:'text' })
+
+  @Column({ type: 'text' })
   image: string;
-  
-  @Column({ type:'text' })
+
+  @Column({ type: 'text' })
   url: string;
 
   @Column({ default: true })

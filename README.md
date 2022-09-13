@@ -84,12 +84,16 @@ npm run start
 * Nestjs
 * Postgresql
 
-## Dependencies
+## Relevant Dependencies
 * Scraping Amazon products with [Nest-crawler](https://www.npmjs.com/package/nest-crawler)
 * axios
+* nestjs-telegraf
 
 ## Aditional information
 * Build and Deploy On AWS using the free instance
     - Route 53
     - Load balancer
     - EC2
+
+## Recommendation
+[json viewer pro](https://chrome.google.com/webstore/detail/json-viewer-pro/eifflpmocdbdmepbjaopkkhbfmdgijcc) see nice json format in browsers

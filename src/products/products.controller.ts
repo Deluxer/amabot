@@ -1,5 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ScrapingAdapter } from './adapters/scraping.adapter';
+import { Controller, Get, Param } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { AmazonService } from './service/amazon.service';
 
@@ -7,25 +6,27 @@ import { AmazonService } from './service/amazon.service';
 export class ProductsController {
   constructor(
     private readonly amazonService: AmazonService,
-    private readonly productService: ProductsService
-    ) {}
+    private readonly productService: ProductsService,
+  ) {}
 
-    @Get()
+  @Get()
   async findAll() {
-
-    const products = await this.amazonService.get('https://www.amazon.com.mx/s?k=','laptop toshiba nueva');
+    const products = await this.amazonService.get(
+      'https://www.amazon.com.mx/s?k=',
+      'laptop toshiba nueva',
+    );
     return products;
   }
 
   @Get(':id')
   async finOne(@Param('id') idProductByStore: string) {
     const product = await this.productService.find(idProductByStore);
-    
-    if(!product) {
+
+    if (!product) {
       return {
         msg: 'Product not found',
-        data: []
-      }
+        data: [],
+      };
     }
 
     return product;

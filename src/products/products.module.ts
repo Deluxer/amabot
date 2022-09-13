@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TelegrafContextType } from 'nestjs-telegraf';
 import { AxiosAdapter } from './adapters/axios.adapter';
 import { NestCrawlerModule } from 'nest-crawler';
 import { Product } from './entity/product.entity';
@@ -12,10 +11,7 @@ import { MercadoLibreService } from './service/mercado-libre.service';
 import { ScrapingAdapter } from './adapters/scraping.adapter';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Product]),
-    NestCrawlerModule
-  ],
+  imports: [TypeOrmModule.forFeature([Product]), NestCrawlerModule],
   controllers: [ProductsController],
   providers: [
     AxiosAdapter,
@@ -25,8 +21,6 @@ import { ScrapingAdapter } from './adapters/scraping.adapter';
     AmazonService,
     ProductsService,
   ],
-  exports: [
-    ProductsService
-  ]
+  exports: [ProductsService],
 })
 export class ProductsModule {}
