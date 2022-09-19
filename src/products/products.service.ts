@@ -41,12 +41,13 @@ export class ProductsService {
     return products;
   }
 
-  async findByName(name: string): Promise<any[]> {
+  async findByName(name: string): Promise<Product[]> {
     name = name.toLowerCase();
 
     const products = await this.productRepository //.findBy({name: Like(`%${ name }%`)})
       .createQueryBuilder('p')
       .where('LOWER(p.name) like LOWER(:name)', { name: `%${name}%` })
+      .distinctOn(['p.idMarketplace'])
       .getMany();
 
     return products;

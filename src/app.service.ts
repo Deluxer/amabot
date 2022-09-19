@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Command, Ctx, Start, Update, Message } from 'nestjs-telegraf';
 import { Context } from 'telegraf';
+import { idMarketplaceType } from './products/common/enums/MarketTypeEnum';
 import { ProductsService } from './products/products.service';
 
 @Update()
@@ -23,16 +24,20 @@ export class AppService {
     if (keywords.length === 0) return;
 
     const productName = keywords.join(' ');
-    let products = [];
-    products = await this.productService.findByName(productName);
+    let getAmazonAndMLProducts = [];
+    getAmazonAndMLProducts = await this.productService.findByName(productName);
 
-    if (products.length < 2)
-      products = await this.productService.create(productName);
+    if (getAmazonAndMLProducts.length < 2)
+      getAmazonAndMLProducts = await this.productService.create(productName);
 
-    products.forEach((product) => {
-      ctx.reply(`[${product.name}](${product.url}) \n$${product.price}`, {
-        parse_mode: 'Markdown',
-      });
+    getAmazonAndMLProducts.forEach((product) => {
+      const marketplace = idMarketplaceType[product.idMarketplace];
+      ctx.reply(
+        `[${product.name}](${product.url}) \n$${product.price} \n Tienda: ${marketplace} \n\n`,
+        {
+          parse_mode: 'Markdown',
+        },
+      );
     });
 
     return;

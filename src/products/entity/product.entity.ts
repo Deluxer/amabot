@@ -1,6 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-
-export type MarketType = 'ml' | 'amz';
+import { idMarketplaceEnum } from '../common/enums/MarketTypeEnum';
 
 @Entity({ name: 'products' })
 export class Product {
@@ -14,7 +13,7 @@ export class Product {
     type: 'enum',
     enum: ['ml', 'amz'],
   })
-  idMarketplace: MarketType;
+  idMarketplace: idMarketplaceEnum;
 
   @Column({ type: 'text' })
   name: string;

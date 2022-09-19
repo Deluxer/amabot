@@ -15,6 +15,7 @@ export class ProductsController {
       'https://www.amazon.com.mx/s?k=',
       'laptop toshiba nueva',
     );
+
     return products;
   }
 
