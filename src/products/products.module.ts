@@ -9,9 +9,11 @@ import { AmazonService } from './service/amazon.service';
 import { MarketPlaceProviderService } from './service/marketplace-provider.service';
 import { MercadoLibreService } from './service/mercado-libre.service';
 import { ScrapingAdapter } from './adapters/scraping.adapter';
+import { SubscriberService } from './service/subscriber.service';
+import { Subscriber } from './entity/subscriber.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Product]), NestCrawlerModule],
+  imports: [TypeOrmModule.forFeature([Product, Subscriber]), NestCrawlerModule],
   controllers: [ProductsController],
   providers: [
     AxiosAdapter,
@@ -20,7 +22,8 @@ import { ScrapingAdapter } from './adapters/scraping.adapter';
     MercadoLibreService,
     AmazonService,
     ProductsService,
+    SubscriberService,
   ],
-  exports: [ProductsService],
+  exports: [ProductsService, SubscriberService],
 })
 export class ProductsModule {}

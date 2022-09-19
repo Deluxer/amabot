@@ -80,6 +80,11 @@ npm run start:dev
 npm run start
 ```
 
+Clean code, run before each commit
+```
+npm run lint
+```
+
 ## Stack used
 * Nestjs
 * Postgresql

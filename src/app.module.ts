@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { AppService } from './app.service';
 import { Product } from './products/entity/product.entity';
+import { Subscriber } from './products/entity/subscriber.entity';
 import { ProductsModule } from './products/products.module';
 
 @Module({
@@ -16,7 +17,7 @@ import { ProductsModule } from './products/products.module';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [Product],
+      entities: [Product, Subscriber],
       synchronize: true,
     }),
     TelegrafModule.forRootAsync({
