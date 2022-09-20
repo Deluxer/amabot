@@ -21,6 +21,18 @@ export class ProductsService {
     return product;
   }
 
+  async findByName(name: string): Promise<Product[]> {
+    name = name.toLowerCase();
+
+    const products = await this.productRepository //.findBy({name: Like(`%${ name }%`)})
+      .createQueryBuilder('p')
+      .where('LOWER(p.name) like LOWER(:name)', { name: `%${name}%` })
+      .distinctOn(['p.idMarketplace'])
+      .getMany();
+
+    return products;
+  }
+
   async create(productName: string): Promise<any[]> {
     const products = await this.marketplaceProvider.searchProduct(productName);
 
@@ -37,18 +49,6 @@ export class ProductsService {
         console.log(error);
       }
     });
-
-    return products;
-  }
-
-  async findByName(name: string): Promise<Product[]> {
-    name = name.toLowerCase();
-
-    const products = await this.productRepository //.findBy({name: Like(`%${ name }%`)})
-      .createQueryBuilder('p')
-      .where('LOWER(p.name) like LOWER(:name)', { name: `%${name}%` })
-      .distinctOn(['p.idMarketplace'])
-      .getMany();
 
     return products;
   }

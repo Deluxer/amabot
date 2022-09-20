@@ -3,9 +3,11 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { AppService } from './app.service';
+import { CommonModule } from './common/common.module';
 import { Product } from './products/entity/product.entity';
 import { Subscriber } from './products/entity/subscriber.entity';
 import { ProductsModule } from './products/products.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { ProductsModule } from './products/products.module';
       }),
     }),
     ProductsModule,
+    ScheduleModule.forRoot(),
+    CommonModule
   ],
   controllers: [],
   providers: [AppService],

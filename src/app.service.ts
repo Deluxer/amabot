@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Command, Ctx, Start, Update, Message } from 'nestjs-telegraf';
 import { Context } from 'telegraf';
+import { serializeString } from './common/helpers/serializeString';
 import { idMarketplaceType } from './products/common/enums/MarketTypeEnum';
 import { ProductsService } from './products/products.service';
 import { SubscriberService } from './products/service/subscriber.service';
@@ -27,7 +28,9 @@ export class AppService {
     keywords.shift();
     if (keywords.length === 0) return;
 
-    const productName = keywords.join(' ');
+    let productName = keywords.join(' ');
+    productName = serializeString(productName);
+
     let getAmazonAndMLProducts = [];
     getAmazonAndMLProducts = await this.productService.findByName(productName);
 
@@ -47,43 +50,30 @@ export class AppService {
     return;
   }
 
-  @Command('subscriber')
+  @Command('subscribe')
   async subscriber(
     @Ctx() ctx: Context,
     @Message('text') command: string,
   ): Promise<string> {
     const keywords = command.split(' ');
 
-    // remove first element "/subscribe"
     keywords.shift();
     if (keywords.length === 0) return;
 
     const userId = ctx.message.chat.id;
+    
     const price = keywords.pop();
-    const productName = keywords.join(' ');
+    let productName = keywords.join(' ');
+    productName = serializeString(productName);
 
-    let getAmazonAndMLProducts = [];
-    getAmazonAndMLProducts = await this.productService.findByName(productName);
+    this.subscriberService.create( productName, parseInt(price), userId );
 
-    if (getAmazonAndMLProducts.length < 2)
-      getAmazonAndMLProducts = await this.productService.create(productName);
-
-    // TODO: insert product subscriber
-    this.subscriberService.create(
-      getAmazonAndMLProducts,
-      parseInt(price),
-      userId,
+    ctx.reply(
+      `Nosotros te notificamos cuando el precio este por llegar a $${price}`,
+      {
+        parse_mode: 'Markdown',
+      },
     );
-
-    // getAmazonAndMLProducts.forEach((product) => {
-    //   const marketplace = idMarketplaceType[product.idMarketplace];
-    //   ctx.reply(
-    //     `[${product.name}](${product.url}) \n$${product.price} \n Tienda: ${marketplace} \n\n`,
-    //     {
-    //       parse_mode: 'Markdown',
-    //     },
-    //   );
-    // });
 
     return;
   }

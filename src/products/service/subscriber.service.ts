@@ -11,37 +11,38 @@ export class SubscriberService {
     private readonly subscriberRepository: Repository<Subscriber>,
   ) {}
 
-  async find(idProductByStore: string): Promise<Subscriber> {
+  async findAll(): Promise<Subscriber[]> {
+    const subscribers = await this.subscriberRepository.find();
+    if (!subscribers) return;
+
+    return subscribers;
+  }
+
+
+  async find(productName: string): Promise<Subscriber> {
     const subscriber = await this.subscriberRepository.findOneBy({
-      idProductByStore,
+      productName,
     });
     if (!subscriber) return;
 
     return subscriber;
   }
 
-  create(products: Product[], price: number, userId: number) {
-    const subscriberInsertDb = [];
-    products.forEach(async (product: Product) => {
-      const subscriber = await this.find(product.idProductByStore);
+  async create(productName: string, price: number, userId: number) {
+      const subscriber = await this.find(productName);
 
       if (subscriber) {
-        subscriberInsertDb.push(
-          this.subscriberRepository.save({ id: subscriber.id, price }),
-        );
+          this.subscriberRepository.save({ id: subscriber.id, price });
         return;
       }
 
       const newPoduct = this.subscriberRepository.create({
-        idMarketplace: product.idMarketplace,
         userTelegramId: userId,
-        idProductByStore: product.idProductByStore,
+        productName,
         price: price,
       });
-      subscriberInsertDb.push(this.subscriberRepository.save(newPoduct));
-    });
+      this.subscriberRepository.save(newPoduct);
 
-    Promise.all(subscriberInsertDb);
 
     return;
   }

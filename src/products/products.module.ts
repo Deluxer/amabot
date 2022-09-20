@@ -11,6 +11,7 @@ import { MercadoLibreService } from './service/mercado-libre.service';
 import { ScrapingAdapter } from './adapters/scraping.adapter';
 import { SubscriberService } from './service/subscriber.service';
 import { Subscriber } from './entity/subscriber.entity';
+import { CommonModule } from '../common/common.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Product, Subscriber]), NestCrawlerModule],

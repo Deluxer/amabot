@@ -6,17 +6,11 @@ export class Subscriber {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({
-    type: 'enum',
-    enum: ['ml', 'amz'],
-  })
-  idMarketplace: idMarketplaceEnum;
-
   @Column({ type: 'integer' })
   userTelegramId: number;
 
   @Column({ type: 'text', unique: true })
-  idProductByStore: string;
+  productName: string;
 
   @Column({ type: 'float', default: 0 })
   price: number;

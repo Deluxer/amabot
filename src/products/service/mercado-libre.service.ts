@@ -13,20 +13,25 @@ export class MercadoLibreService {
     const status = 'active';
     const fullUrl = `${url}q=${q}&sort=${sort}&limit=${limit}&status=${status}`;
 
-    const { data } = await this.axiosAdapter.get<MercadoLibreResponse>(fullUrl);
-
-    if (data.results.length == 0) return;
-
-    const { title, price, thumbnail, permalink, id } = data.results[0];
-
-    return new ProductResponseDto(
-      title,
-      'description',
-      price,
-      thumbnail,
-      permalink,
-      id,
-      'ml',
-    );
+    try {
+      const { data } = await this.axiosAdapter.get<MercadoLibreResponse>(fullUrl);
+  
+      if (data.results.length == 0) return;
+  
+      const { title, price, thumbnail, permalink, id } = data.results[0];
+  
+      return new ProductResponseDto(
+        title,
+        'description',
+        price,
+        thumbnail,
+        permalink,
+        id,
+        'ml',
+      );
+      
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
