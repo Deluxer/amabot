@@ -4,9 +4,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TelegrafModule } from 'nestjs-telegraf';
 import { AppService } from './app.service';
 import { CommonModule } from './common/common.module';
-import { Product } from './products/entity/product.entity';
-import { Subscriber } from './products/entity/subscriber.entity';
-import { ProductsModule } from './products/products.module';
+import { Product } from './bot/entity/product.entity';
+import { Subscriber } from './bot/entity/subscriber.entity';
+import { ProductsModule } from './bot/products.module';
 import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({

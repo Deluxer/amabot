@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { Command, Ctx, Start, Update, Message } from 'nestjs-telegraf';
 import { Context } from 'telegraf';
 import { serializeString } from './common/helpers/serializeString';
-import { idMarketplaceType } from './products/common/enums/MarketTypeEnum';
-import { ProductsService } from './products/products.service';
-import { SubscriberService } from './products/service/subscriber.service';
+import { idMarketplaceType } from './bot/common/enums/MarketTypeEnum';
+import { ProductsService } from './bot/products.service';
+import { SubscriberService } from './bot/service/subscriber.service';
 
 @Update()
 @Injectable()

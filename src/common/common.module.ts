@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ProductsModule } from '../products/products.module';
+import { ProductsModule } from '../bot/products.module';
 import { SubscriberTaskService } from './cron/subscriber-task.service';
 import { NotificationService } from './notifications/notification.service';
 

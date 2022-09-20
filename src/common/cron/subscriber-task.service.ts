@@ -1,7 +1,7 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { Cron, CronExpression } from '@nestjs/schedule';
-import { ProductsService } from "../../products/products.service";
-import { SubscriberService } from "../../products/service/subscriber.service";
+import { ProductsService } from "../../bot/products.service";
+import { SubscriberService } from "../../bot/service/subscriber.service";
 
 @Injectable()
 export class SubscriberTaskService {
