@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Product } from './entity/product.entity';
-import { MarketPlaceProviderService } from './service/marketplace-provider.service';
+import { MarketPlaceProviderService } from './services';
 
 @Injectable()
 export class ProductsService {
@@ -33,8 +33,8 @@ export class ProductsService {
     return products;
   }
 
-  async create(productName: string): Promise<any[]> {
-    const products = await this.marketplaceProvider.searchProduct(productName);
+  async create(productName: string): Promise<Product[]> {
+    const products = await this.getProductsfromApi(productName);
 
     //save in DB
     products.forEach(async (product) => {
@@ -51,5 +51,9 @@ export class ProductsService {
     });
 
     return products;
+  }
+
+  private async getProductsfromApi(productName: string): Promise<Product[]> {
+    return await this.marketplaceProvider.searchProduct(productName);
   }
 }

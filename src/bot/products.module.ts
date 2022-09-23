@@ -1,20 +1,26 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AxiosAdapter } from './adapters/axios.adapter';
 import { NestCrawlerModule } from 'nest-crawler';
 import { Product } from './entity/product.entity';
 import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
-import { AmazonService } from './service/amazon.service';
-import { MarketPlaceProviderService } from './service/marketplace-provider.service';
-import { MercadoLibreService } from './service/mercado-libre.service';
+import {
+  MarketPlaceProviderService,
+  MercadoLibreService,
+  AmazonService,
+  SubscribeService,
+} from './services';
 import { ScrapingAdapter } from './adapters/scraping.adapter';
-import { SubscriberService } from './service/subscriber.service';
 import { Subscriber } from './entity/subscriber.entity';
 import { CommonModule } from '../common/common.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Product, Subscriber]), NestCrawlerModule],
+  imports: [
+    TypeOrmModule.forFeature([Product, Subscriber]),
+    NestCrawlerModule,
+    forwardRef(() => CommonModule),
+  ],
   controllers: [ProductsController],
   providers: [
     AxiosAdapter,
@@ -23,8 +29,8 @@ import { CommonModule } from '../common/common.module';
     MercadoLibreService,
     AmazonService,
     ProductsService,
-    SubscriberService,
+    SubscribeService,
   ],
-  exports: [ProductsService, SubscriberService],
+  exports: [ProductsService, SubscribeService],
 })
 export class ProductsModule {}

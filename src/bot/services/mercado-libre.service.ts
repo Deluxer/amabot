@@ -14,12 +14,14 @@ export class MercadoLibreService {
     const fullUrl = `${url}q=${q}&sort=${sort}&limit=${limit}&status=${status}`;
 
     try {
-      const { data } = await this.axiosAdapter.get<MercadoLibreResponse>(fullUrl);
-  
+      const { data } = await this.axiosAdapter.get<MercadoLibreResponse>(
+        fullUrl,
+      );
+
       if (data.results.length == 0) return;
-  
+
       const { title, price, thumbnail, permalink, id } = data.results[0];
-  
+
       return new ProductResponseDto(
         title,
         'description',
@@ -29,7 +31,6 @@ export class MercadoLibreService {
         id,
         'ml',
       );
-      
     } catch (error) {
       console.log(error);
     }

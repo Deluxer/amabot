@@ -4,14 +4,14 @@ import { Context } from 'telegraf';
 import { serializeString } from './common/helpers/serializeString';
 import { idMarketplaceType } from './bot/common/enums/MarketTypeEnum';
 import { ProductsService } from './bot/products.service';
-import { SubscriberService } from './bot/service/subscriber.service';
+import { SubscribeService } from './bot/services/subscribe.service';
 
 @Update()
 @Injectable()
 export class AppService {
   constructor(
     private readonly productService: ProductsService,
-    private readonly subscriberService: SubscriberService,
+    private readonly subscribeService: SubscribeService,
   ) {}
 
   @Start()
@@ -61,12 +61,12 @@ export class AppService {
     if (keywords.length === 0) return;
 
     const userId = ctx.message.chat.id;
-    
+
     const price = keywords.pop();
     let productName = keywords.join(' ');
     productName = serializeString(productName);
 
-    this.subscriberService.create( productName, parseInt(price), userId );
+    this.subscribeService.create(productName, parseInt(price), userId);
 
     ctx.reply(
       `Nosotros te notificamos cuando el precio este por llegar a $${price}`,

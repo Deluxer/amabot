@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Product } from '../entity/product.entity';
 import { Subscriber } from '../entity/subscriber.entity';
 
 @Injectable()
-export class SubscriberService {
+export class SubscribeService {
   constructor(
     @InjectRepository(Subscriber)
     private readonly subscriberRepository: Repository<Subscriber>,
@@ -18,7 +17,6 @@ export class SubscriberService {
     return subscribers;
   }
 
-
   async find(productName: string): Promise<Subscriber> {
     const subscriber = await this.subscriberRepository.findOneBy({
       productName,
@@ -29,20 +27,19 @@ export class SubscriberService {
   }
 
   async create(productName: string, price: number, userId: number) {
-      const subscriber = await this.find(productName);
+    const subscriber = await this.find(productName);
 
-      if (subscriber) {
-          this.subscriberRepository.save({ id: subscriber.id, price });
-        return;
-      }
+    if (subscriber) {
+      this.subscriberRepository.save({ id: subscriber.id, price });
+      return;
+    }
 
-      const newPoduct = this.subscriberRepository.create({
-        userTelegramId: userId,
-        productName,
-        price: price,
-      });
-      this.subscriberRepository.save(newPoduct);
-
+    const newPoduct = this.subscriberRepository.create({
+      userTelegramId: userId,
+      productName,
+      price: price,
+    });
+    this.subscriberRepository.save(newPoduct);
 
     return;
   }

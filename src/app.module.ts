@@ -8,6 +8,7 @@ import { Product } from './bot/entity/product.entity';
 import { Subscriber } from './bot/entity/subscriber.entity';
 import { ProductsModule } from './bot/products.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { BullModule } from '@nestjs/bull';
 
 @Module({
   imports: [
@@ -22,6 +23,13 @@ import { ScheduleModule } from '@nestjs/schedule';
       entities: [Product, Subscriber],
       synchronize: true,
     }),
+    BullModule.forRoot({
+      redis: {
+        host: process.env.REDIS_HOST,
+        port: +process.env.REDIS_PORT,
+        password: process.env.REDIS_PASSWORD,
+      },
+    }),
     TelegrafModule.forRootAsync({
       botName: 'amabot',
       useFactory: () => ({
@@ -31,7 +39,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     }),
     ProductsModule,
     ScheduleModule.forRoot(),
-    CommonModule
+    CommonModule,
   ],
   controllers: [],
   providers: [AppService],

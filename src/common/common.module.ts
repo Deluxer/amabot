@@ -1,11 +1,18 @@
-import { Module } from '@nestjs/common';
+import { BullModule } from '@nestjs/bull';
+import { forwardRef, Module } from '@nestjs/common';
 import { ProductsModule } from '../bot/products.module';
-import { SubscriberTaskService } from './cron/subscriber-task.service';
-import { NotificationService } from './notifications/notification.service';
+import { SubscribeCronService } from './cron/subscribe-cron.service';
+import { ProductProcessor } from './queue/product.processor';
+import { ProductProducer } from './queue/product.producer';
 
 @Module({
-    imports: [ProductsModule],
-    exports: [SubscriberTaskService],
-    providers: [SubscriberTaskService]
+  imports: [
+    forwardRef(() => ProductsModule),
+    BullModule.registerQueue({
+      name: 'product-queue',
+    }),
+  ],
+  exports: [SubscribeCronService, ProductProducer],
+  providers: [SubscribeCronService, ProductProducer, ProductProcessor],
 })
 export class CommonModule {}

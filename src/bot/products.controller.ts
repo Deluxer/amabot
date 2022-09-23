@@ -1,19 +1,17 @@
 import { Controller, Get, Logger, Param } from '@nestjs/common';
-import { ProductsService } from './products.service';
-import { AmazonService } from './service/amazon.service';
 import { SchedulerRegistry } from '@nestjs/schedule';
-import { Cron } from '@nestjs/schedule';
-import { SubscriberTaskService } from '../common/cron/subscriber-task.service';
+import { AmazonService } from './services/amazon.service';
+import { ProductsService } from './products.service';
+import { SubscribeCronService } from '../common/cron/subscribe-cron.service';
 
 @Controller('products')
 export class ProductsController {
-
-  private readonly logger = new Logger(SubscriberTaskService.name);
+  private readonly logger = new Logger(SubscribeCronService.name);
 
   constructor(
     private readonly amazonService: AmazonService,
     private readonly productService: ProductsService,
-    private schedulerRegistry: SchedulerRegistry
+    private schedulerRegistry: SchedulerRegistry,
   ) {}
 
   @Get()
@@ -22,8 +20,8 @@ export class ProductsController {
       'https://www.amazon.com.mx/s?k=',
       'laptop toshiba nueva',
     );
-    
-    //  only to stop cron 
+
+    //  stop cron
     this.deleteCron('consumeApiAmazonAndML');
 
     return products;

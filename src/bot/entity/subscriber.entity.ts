@@ -1,5 +1,4 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { idMarketplaceEnum } from '../common/enums/MarketTypeEnum';
 
 @Entity({ name: 'subscriber' })
 export class Subscriber {
