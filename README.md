@@ -8,28 +8,8 @@ Get start [AMABot](https://t.me/amaproductsbot) and seach products
     - MercadoLibre
 
 ## How to use AMABot?
-1. Enter at the amabot in Telegram https://t.me/amaproductsbot
-2. Click on start
-3. Use the command /buscar \<product>  | ✔ | 
-
-Search result by product:
-```
-* Name products
-* Price
-* URL
-
-```
-Example API response [http://api.mireino.com/products](http://api.mireino.com/products)
-
-
-## To do task
-* Subscribe and receive a notification when the price changes. Format /buscar \<product> /<price>
-* Swagger documentation
-* Generate a Cron for automatic searches and update database
-* Unit test with jest
-
-
-# Crate new project
+Search products use command /buscar \<product>  | ✔ | <br/>
+Subcribe products command /subscribe \<product> \<price>  | ✔ | 
 
 ## Requirements
 * NPM
